@@ -7,3 +7,5 @@ __pycache__/
 data/steel/images/
 data/steel/annotations/
 data/steel/labels/
+temp_*
+output_annotated.jpg
