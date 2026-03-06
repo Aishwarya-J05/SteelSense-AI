@@ -1,0 +1,285 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+.upload-zone {
+    border: 2px dashed var(--border2);
+    border-radius: 10px;
+    padding: 56px 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--bg3);
+    position: relative;
+}
+
+.upload-zone:hover, .upload-zone.drag-over {
+    border-color: var(--accent);
+    background: rgba(74,158,255,0.04);
+}
+
+.upload-zone input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+.upload-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba(74,158,255,0.1);
+    border: 1px solid rgba(74,158,255,0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin: 0 auto 16px;
+}
+
+.upload-title { font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 6px; }
+.upload-sub { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; }
+
+.btn-submit { margin-top: 24px; padding: 11px 36px; font-size: 14px; }
+
+.preview-img {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    object-fit: contain;
+    max-height: 380px;
+    background: var(--bg2);
+}
+
+.img-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    margin-bottom: 10px;
+    font-family: 'DM Mono', monospace;
+}
+
+.defect-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 14px;
+    transition: border-color 0.2s;
+}
+
+.defect-card:hover { border-color: var(--border2); }
+
+.defect-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.defect-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.defect-meta { display: flex; align-items: center; gap: 10px; }
+.confidence { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; }
+
+.loading-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,14,23,0.9);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    backdrop-filter: blur(4px);
+}
+
+.loading-overlay.active { display: flex; }
+
+.spinner {
+    width: 44px;
+    height: 44px;
+    border: 3px solid var(--border2);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+.loading-text { color: var(--text2); font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.5px; }
+.loading-sub  { color: var(--muted);  font-family: 'DM Mono', monospace; font-size: 11px; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.saved-banner {
+    background: rgba(16,185,129,0.08);
+    border: 1px solid rgba(16,185,129,0.2);
+    color: #34d399;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.report-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 28px 0 16px;
+    letter-spacing: 0.5px;
+}
+
+.clean-banner {
+    background: rgba(16,185,129,0.08);
+    border: 1px solid rgba(16,185,129,0.2);
+    color: #34d399;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+}
+</style>
+
+<!-- Loading -->
+<div class="loading-overlay" id="loading">
+    <div class="spinner"></div>
+    <div class="loading-text">Running defect analysis...</div>
+    <div class="loading-sub">// YOLO detection + Gemini AI explanation</div>
+</div>
+
+<nav class="navbar">
+    <a href="/" class="nav-logo">
+        <div class="nav-logo-icon">⬡</div>
+        Steel<span>Sense</span>
+    </a>
+    <div class="nav-links">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/analyze" class="active">Analyze</a>
+        <a href="/reports">Reports</a>
+        <a href="/logout" class="logout">Sign Out</a>
+    </div>
+</nav>
+
+<div class="page">
+    <div class="page-header">
+        <div class="page-title">Defect <span>Analyzer</span></div>
+        <div class="page-sub">// upload steel surface image · ai-powered analysis</div>
+    </div>
+
+    {% if not result %}
+    <form method="POST" enctype="multipart/form-data" id="upload-form">
+        <div class="upload-zone" id="upload-zone">
+            <input type="file" name="file" accept=".jpg,.jpeg,.png" id="file-input" required>
+            <div class="upload-icon">📁</div>
+            <div class="upload-title" id="upload-title">Drop image here or click to browse</div>
+            <div class="upload-sub">Supports JPG, JPEG, PNG · Steel surface images</div>
+        </div>
+        <div style="text-align:center;">
+            <button type="submit" class="btn btn-primary btn-submit">Run Analysis →</button>
+        </div>
+    </form>
+    {% endif %}
+
+    {% if result %}
+    <div class="saved-banner">✓ Report saved to your account</div>
+
+    <div class="grid-2" style="margin-bottom:28px;">
+        <div>
+            <div class="img-label">Original Image</div>
+            <img src="data:image/jpeg;base64,{{ result.original_image }}" class="preview-img">
+        </div>
+        <div>
+            <div class="img-label">Detection Output</div>
+            <img src="data:image/jpeg;base64,{{ result.annotated_image }}" class="preview-img">
+        </div>
+    </div>
+
+    <div class="report-title">Analysis Report &mdash; {{ result.detections|length }} defect(s) detected</div>
+
+    {% if result.detections|length == 0 %}
+    <div class="clean-banner">✓ No defects detected — surface appears within tolerance</div>
+    {% endif %}
+
+    {% for det in result.detections %}
+    <div class="defect-card">
+        <div class="defect-header">
+            <div class="defect-title">{{ det.defect_type }}</div>
+            <div class="defect-meta">
+                <span class="confidence">{{ "%.0f"|format(det.confidence * 100) }}% conf</span>
+                <span class="badge badge-{{ det.severity }}">{{ det.severity }}</span>
+            </div>
+        </div>
+        <div class="info-block">
+            <div class="info-label">Explanation</div>
+            <div class="info-text">{{ det.explanation }}</div>
+        </div>
+        <div class="info-block">
+            <div class="info-label">Probable Cause</div>
+            <div class="info-text">{{ det.probable_cause }}</div>
+        </div>
+        <div class="info-block">
+            <div class="info-label">Recommended Action</div>
+            <div class="info-text">{{ det.recommended_action }}</div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <div style="margin-top:20px;display:flex;gap:10px;">
+        <a href="/analyze" class="btn btn-primary">Analyze Another →</a>
+        <a href="/reports" class="btn btn-outline">View All Reports</a>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+const form = document.getElementById('upload-form');
+const loading = document.getElementById('loading');
+const fileInput = document.getElementById('file-input');
+const uploadZone = document.getElementById('upload-zone');
+const uploadTitle = document.getElementById('upload-title');
+
+if (form) {
+    form.addEventListener('submit', () => loading.classList.add('active'));
+}
+
+if (fileInput) {
+    fileInput.addEventListener('change', () => {
+        if (fileInput.files[0]) {
+            uploadTitle.textContent = fileInput.files[0].name;
+            uploadZone.querySelector('.upload-icon').textContent = '✓';
+            uploadZone.style.borderColor = 'var(--accent)';
+        }
+    });
+}
+
+if (uploadZone) {
+    uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
+    uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+    uploadZone.addEventListener('drop', e => {
+        e.preventDefault();
+        uploadZone.classList.remove('drag-over');
+        fileInput.files = e.dataTransfer.files;
+        if (fileInput.files[0]) {
+            uploadTitle.textContent = fileInput.files[0].name;
+            uploadZone.querySelector('.upload-icon').textContent = '✓';
+        }
+    });
+}
+</script>
+{% endblock %}

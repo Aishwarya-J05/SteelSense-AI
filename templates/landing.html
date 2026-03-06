@@ -1,0 +1,223 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 32px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(74,158,255,0.08) 0%, transparent 70%);
+}
+
+.hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(74,158,255,0.08);
+    border: 1px solid rgba(74,158,255,0.2);
+    color: var(--steel);
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    font-family: 'DM Mono', monospace;
+    animation: fadeUp 0.5s ease both;
+}
+
+.hero-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    animation: fadeUp 0.5s 0.1s ease both;
+}
+
+.hero-title span { color: var(--accent); }
+
+.hero-title-sub {
+    display: block;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    font-weight: 400;
+    color: var(--text2);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    margin-top: 8px;
+}
+
+.hero-desc {
+    font-size: 15px;
+    color: var(--text2);
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+    animation: fadeUp 0.5s 0.2s ease both;
+}
+
+.stats-strip {
+    display: flex;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 48px;
+    animation: fadeUp 0.5s 0.3s ease both;
+    background: var(--bg3);
+}
+
+.stat-box {
+    padding: 20px 36px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+}
+
+.stat-box:last-child { border-right: none; }
+
+.stat-val {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 4px;
+    font-family: 'DM Mono', monospace;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    max-width: 820px;
+    width: 100%;
+    margin-bottom: 48px;
+    animation: fadeUp 0.5s 0.4s ease both;
+}
+
+.feature-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px 20px;
+    text-align: left;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.feature-card:hover { border-color: var(--border2); transform: translateY(-3px); }
+
+.feature-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(74,158,255,0.1);
+    border: 1px solid rgba(74,158,255,0.2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    margin-bottom: 14px;
+}
+
+.feature-title { font-family: 'Rajdhani', sans-serif; font-size: 16px; font-weight: 600; margin-bottom: 6px; letter-spacing: 0.5px; }
+.feature-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+.tech-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 40px;
+    animation: fadeUp 0.5s 0.5s ease both;
+}
+
+.tech-pill {
+    padding: 5px 14px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: 'DM Mono', monospace;
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    color: var(--text2);
+    letter-spacing: 0.5px;
+}
+
+.cta-group { display: flex; gap: 12px; animation: fadeUp 0.5s 0.6s ease both; }
+
+.btn-lg { padding: 12px 32px; font-size: 14px; }
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+</style>
+
+<div class="hero">
+    <div class="hero-eyebrow">⬡ Industrial AI · Real-Time Detection · Computer Vision</div>
+
+    <h1 class="hero-title">
+        Steel<span>Sense</span>
+        <span class="hero-title-sub">AI Defect Detection System</span>
+    </h1>
+
+    <p class="hero-desc">
+        Upload any steel surface image and receive instant defect analysis powered by
+        YOLOv8 object detection and Gemini Vision AI explanation engine.
+    </p>
+
+    <div class="stats-strip">
+        <div class="stat-box"><div class="stat-val">6</div><div class="stat-label">Defect Classes</div></div>
+        <div class="stat-box"><div class="stat-val">73.6%</div><div class="stat-label">mAP50 Score</div></div>
+        <div class="stat-box"><div class="stat-val">&lt;2s</div><div class="stat-label">Analysis Time</div></div>
+        <div class="stat-box"><div class="stat-val">~40,000</div><div class="stat-label">Training Images</div></div>
+    </div>
+
+    <div class="features">
+        <div class="feature-card">
+            <div class="feature-icon">⬡</div>
+            <div class="feature-title">Precision Detection</div>
+            <div class="feature-desc">YOLOv8 trained on NEU Steel dataset identifies crazing, inclusion, patches, pitting, rolled-in scale and scratches.</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">◈</div>
+            <div class="feature-title">GenAI Explanation</div>
+            <div class="feature-desc">Gemini Vision API generates plain-English cause analysis and recommended corrective actions per defect.</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">▦</div>
+            <div class="feature-title">Report History</div>
+            <div class="feature-desc">All inspections saved to your account. Track defect trends, severity distributions and export reports.</div>
+        </div>
+    </div>
+
+    <div class="tech-pills">
+        <span class="tech-pill">YOLOv8</span>
+        <span class="tech-pill">Gemini Vision</span>
+        <span class="tech-pill">Flask</span>
+        <span class="tech-pill">Supabase</span>
+        <span class="tech-pill">OpenCV</span>
+        <span class="tech-pill">Python</span>
+    </div>
+
+    <div class="cta-group">
+        <a href="/login" class="btn btn-primary btn-lg">Get Started →</a>
+        <a href="/login" class="btn btn-outline btn-lg">Sign In</a>
+    </div>
+</div>
+{% endblock %}

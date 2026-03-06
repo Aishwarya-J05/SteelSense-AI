@@ -1,0 +1,232 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+.report-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+}
+
+.report-card:hover { border-color: var(--border2); }
+
+.report-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+}
+
+.report-header:hover { background: rgba(255,255,255,0.02); }
+
+.report-left { display: flex; align-items: center; gap: 12px; }
+
+.report-index {
+    width: 28px;
+    height: 28px;
+    background: var(--bg4);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    color: var(--muted);
+    flex-shrink: 0;
+}
+
+.report-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+}
+
+.report-right { display: flex; align-items: center; gap: 16px; }
+
+.report-meta { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; }
+
+.chevron { color: var(--muted); font-size: 10px; transition: transform 0.2s; }
+.chevron.open { transform: rotate(180deg); }
+
+.report-body {
+    display: none;
+    padding: 0 20px 20px;
+    border-top: 1px solid var(--border);
+}
+
+.report-body.open { display: block; }
+
+.report-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.report-img {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    object-fit: contain;
+    max-height: 280px;
+    background: var(--bg2);
+}
+
+.img-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-family: 'DM Mono', monospace;
+}
+
+.defect-mini {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.defect-mini-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--accent);
+    margin-bottom: 4px;
+}
+
+.defect-mini-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.empty-state {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 64px;
+    text-align: center;
+}
+
+.empty-icon { font-size: 2.5rem; margin-bottom: 14px; opacity: 0.4; }
+.empty-title { font-family: 'Rajdhani', sans-serif; font-size: 20px; font-weight: 600; margin-bottom: 6px; }
+.empty-sub { color: var(--muted); font-size: 12px; font-family: 'DM Mono', monospace; margin-bottom: 20px; }
+
+.no-defects-banner {
+    background: rgba(16,185,129,0.08);
+    border: 1px solid rgba(16,185,129,0.2);
+    color: #34d399;
+    border-radius: 7px;
+    padding: 14px;
+    text-align: center;
+    font-size: 13px;
+    font-family: 'DM Mono', monospace;
+}
+</style>
+
+<nav class="navbar">
+    <a href="/" class="nav-logo">
+        <div class="nav-logo-icon">⬡</div>
+        Steel<span>Sense</span>
+    </a>
+    <div class="nav-links">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/analyze">Analyze</a>
+        <a href="/reports" class="active">Reports</a>
+        <a href="/logout" class="logout">Sign Out</a>
+    </div>
+</nav>
+
+<div class="page">
+    <div class="page-header">
+        <div class="page-title">Inspection <span>Reports</span></div>
+        <div class="page-sub">// complete inspection history · {{ reports|length }} total records</div>
+    </div>
+
+    {% if not reports %}
+    <div class="empty-state">
+        <div class="empty-icon">▦</div>
+        <div class="empty-title">No Reports Found</div>
+        <div class="empty-sub">// run your first inspection to generate reports</div>
+        <a href="/analyze" class="btn btn-primary">Start Analyzing →</a>
+    </div>
+
+    {% else %}
+    {% for report in reports %}
+    <div class="report-card">
+        <div class="report-header" data-index="{{ loop.index }}" onclick="toggleReport(this.dataset.index)">
+            <div class="report-left">
+                <div class="report-index">{{ loop.index }}</div>
+                <div class="report-name">{{ report.image_name or 'Unknown image' }}</div>
+            </div>
+            <div class="report-right">
+                <span class="report-meta">{{ report.total_defects }} defect(s)</span>
+                <span class="report-meta">{{ report.created_at[:10] }}</span>
+                {% if report.total_defects > 0 %}
+                <span class="badge badge-HIGH" style="font-size:10px;">INSPECT</span>
+                {% else %}
+                <span class="badge badge-LOW" style="font-size:10px;">CLEAN</span>
+                {% endif %}
+                <span class="chevron" id="chevron-{{ loop.index }}">▼</span>
+            </div>
+        </div>
+
+        <div class="report-body" id="body-{{ loop.index }}">
+            <div class="report-images">
+                <div>
+                    <div class="img-label">Annotated Output</div>
+                    {% if report.annotated_image %}
+                    <img src="data:image/jpeg;base64,{{ report.annotated_image }}" class="report-img">
+                    {% else %}
+                    <div style="background:var(--bg2);border-radius:8px;padding:40px;text-align:center;color:var(--muted);font-size:12px;font-family:'DM Mono',monospace;">No image recorded</div>
+                    {% endif %}
+                </div>
+                <div>
+                    <div class="img-label">Defect Details</div>
+                    {% if report.defects %}
+                        {% for det in report.defects %}
+                        <div class="defect-mini">
+                            <div>
+                                <div class="defect-mini-name">{{ det.defect_type }}</div>
+                                <div class="defect-mini-desc">{{ det.explanation }}</div>
+                            </div>
+                            <span class="badge badge-{{ det.severity }}">{{ det.severity }}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                    <div class="no-defects-banner">✓ No defects detected</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+
+<script>
+function toggleReport(index) {
+    const body = document.getElementById(`body-${index}`);
+    const chevron = document.getElementById(`chevron-${index}`);
+    body.classList.toggle('open');
+    chevron.classList.toggle('open');
+}
+</script>
+{% endblock %}

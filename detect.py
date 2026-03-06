@@ -15,7 +15,8 @@ COLORS = {
 
 def detect_defects(image_path):
     image = cv2.imread(image_path)
-    results = model(image_path)[0]
+    results = model(image_path, conf=0.15)[0]
+    print("Total detections:", len(results.boxes))
     
     detections = []
 
