@@ -4,7 +4,7 @@
 .upload-zone {
     border: 2px dashed var(--border2);
     border-radius: 10px;
-    padding: 56px 40px;
+    padding: 48px 24px;
     text-align: center;
     cursor: pointer;
     transition: all 0.2s;
@@ -27,136 +27,88 @@
 }
 
 .upload-icon {
-    width: 56px;
-    height: 56px;
+    width: 52px; height: 52px;
     background: rgba(74,158,255,0.1);
     border: 1px solid rgba(74,158,255,0.2);
     border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    margin: 0 auto 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    margin: 0 auto 14px;
 }
 
-.upload-title { font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 6px; }
+.upload-title { font-family: 'Rajdhani', sans-serif; font-size: 17px; font-weight: 600; margin-bottom: 6px; }
 .upload-sub { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; }
 
-.btn-submit { margin-top: 24px; padding: 11px 36px; font-size: 14px; }
+.btn-submit { margin-top: 20px; padding: 12px 36px; font-size: 14px; }
 
 .preview-img {
-    width: 100%;
-    border-radius: 8px;
+    width: 100%; border-radius: 8px;
     border: 1px solid var(--border);
-    object-fit: contain;
-    max-height: 380px;
+    object-fit: contain; max-height: 360px;
     background: var(--bg2);
 }
 
-.img-label {
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--muted);
-    margin-bottom: 10px;
-    font-family: 'DM Mono', monospace;
-}
+.img-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 10px; font-family: 'DM Mono', monospace; }
 
-.defect-card {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 14px;
-    transition: border-color 0.2s;
-}
-
+.defect-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 18px; margin-bottom: 12px; transition: border-color 0.2s; }
 .defect-card:hover { border-color: var(--border2); }
 
-.defect-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 14px;
-}
-
-.defect-title {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-}
-
-.defect-meta { display: flex; align-items: center; gap: 10px; }
+.defect-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; gap: 8px; flex-wrap: wrap; }
+.defect-title { font-family: 'Rajdhani', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
+.defect-meta { display: flex; align-items: center; gap: 8px; }
 .confidence { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; }
 
 .loading-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(10,14,23,0.9);
-    z-index: 999;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 20px;
+    display: none; position: fixed; inset: 0;
+    background: rgba(10,14,23,0.92); z-index: 999;
+    align-items: center; justify-content: center;
+    flex-direction: column; gap: 16px;
     backdrop-filter: blur(4px);
 }
 
 .loading-overlay.active { display: flex; }
 
 .spinner {
-    width: 44px;
-    height: 44px;
+    width: 44px; height: 44px;
     border: 3px solid var(--border2);
     border-top-color: var(--accent);
     border-radius: 50%;
     animation: spin 0.7s linear infinite;
 }
 
-.loading-text { color: var(--text2); font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.5px; }
-.loading-sub  { color: var(--muted);  font-family: 'DM Mono', monospace; font-size: 11px; }
+.loading-text { color: var(--text2); font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.5px; text-align: center; padding: 0 20px; }
+.loading-sub  { color: var(--muted); font-family: 'DM Mono', monospace; font-size: 11px; }
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
 .saved-banner {
     background: rgba(16,185,129,0.08);
     border: 1px solid rgba(16,185,129,0.2);
-    color: #34d399;
-    border-radius: 8px;
-    padding: 12px 16px;
-    font-size: 12px;
+    color: #34d399; border-radius: 8px;
+    padding: 12px 16px; font-size: 12px;
     font-family: 'DM Mono', monospace;
     margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    display: flex; align-items: center; gap: 8px;
 }
 
-.report-title {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 20px;
-    font-weight: 600;
-    margin: 28px 0 16px;
-    letter-spacing: 0.5px;
-}
+.report-title { font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 600; margin: 24px 0 14px; letter-spacing: 0.5px; }
 
 .clean-banner {
     background: rgba(16,185,129,0.08);
     border: 1px solid rgba(16,185,129,0.2);
-    color: #34d399;
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 18px;
-    font-weight: 600;
+    color: #34d399; border-radius: 8px; padding: 20px;
+    text-align: center; font-family: 'Rajdhani', sans-serif;
+    font-size: 17px; font-weight: 600;
+}
+
+.action-btns { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+
+@media (max-width: 768px) {
+    .action-btns { flex-direction: column; }
+    .action-btns .btn { width: 100%; justify-content: center; }
 }
 </style>
 
-<!-- Loading -->
 <div class="loading-overlay" id="loading">
     <div class="spinner"></div>
     <div class="loading-text">Running defect analysis...</div>
@@ -174,7 +126,17 @@
         <a href="/reports">Reports</a>
         <a href="/logout" class="logout">Sign Out</a>
     </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+    </button>
 </nav>
+
+<div class="mobile-menu" id="mobile-menu">
+    <a href="/dashboard">Dashboard</a>
+    <a href="/analyze" class="active">Analyze</a>
+    <a href="/reports">Reports</a>
+    <a href="/logout" class="logout">Sign Out</a>
+</div>
 
 <div class="page">
     <div class="page-header">
@@ -187,8 +149,8 @@
         <div class="upload-zone" id="upload-zone">
             <input type="file" name="file" accept=".jpg,.jpeg,.png" id="file-input" required>
             <div class="upload-icon">📁</div>
-            <div class="upload-title" id="upload-title">Drop image here or click to browse</div>
-            <div class="upload-sub">Supports JPG, JPEG, PNG · Steel surface images</div>
+            <div class="upload-title" id="upload-title">Tap to select image</div>
+            <div class="upload-sub">Supports JPG, JPEG, PNG</div>
         </div>
         <div style="text-align:center;">
             <button type="submit" class="btn btn-primary btn-submit">Run Analysis →</button>
@@ -199,7 +161,7 @@
     {% if result %}
     <div class="saved-banner">✓ Report saved to your account</div>
 
-    <div class="grid-2" style="margin-bottom:28px;">
+    <div class="grid-2" style="margin-bottom:24px;">
         <div>
             <div class="img-label">Original Image</div>
             <img src="data:image/jpeg;base64,{{ result.original_image }}" class="preview-img">
@@ -210,7 +172,7 @@
         </div>
     </div>
 
-    <div class="report-title">Analysis Report &mdash; {{ result.detections|length }} defect(s) detected</div>
+    <div class="report-title">Analysis Report — {{ result.detections|length }} defect(s) detected</div>
 
     {% if result.detections|length == 0 %}
     <div class="clean-banner">✓ No defects detected — surface appears within tolerance</div>
@@ -240,7 +202,7 @@
     </div>
     {% endfor %}
 
-    <div style="margin-top:20px;display:flex;gap:10px;">
+    <div class="action-btns">
         <a href="/analyze" class="btn btn-primary">Analyze Another →</a>
         <a href="/reports" class="btn btn-outline">View All Reports</a>
     </div>
@@ -254,9 +216,7 @@ const fileInput = document.getElementById('file-input');
 const uploadZone = document.getElementById('upload-zone');
 const uploadTitle = document.getElementById('upload-title');
 
-if (form) {
-    form.addEventListener('submit', () => loading.classList.add('active'));
-}
+if (form) form.addEventListener('submit', () => loading.classList.add('active'));
 
 if (fileInput) {
     fileInput.addEventListener('change', () => {

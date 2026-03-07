@@ -3,20 +3,17 @@
 <style>
 .login-page {
     min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 420px 1fr;
+    display: flex;
     align-items: center;
-    padding: 40px 32px;
+    justify-content: center;
+    padding: 40px 16px;
     position: relative;
     z-index: 1;
 }
 
-.login-box { grid-column: 2; }
+.login-box { width: 100%; max-width: 420px; }
 
-.login-logo {
-    text-align: center;
-    margin-bottom: 32px;
-}
+.login-logo { text-align: center; margin-bottom: 28px; }
 
 .login-logo h2 {
     font-family: 'Rajdhani', sans-serif;
@@ -41,7 +38,7 @@
     background: var(--bg3);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 28px;
+    padding: 24px;
 }
 
 .tabs {
@@ -50,23 +47,14 @@
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: 3px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
 .tab {
-    flex: 1;
-    text-align: center;
-    padding: 8px;
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--muted);
-    border-radius: 6px;
-    transition: all 0.15s;
-    background: none;
-    border: none;
-    font-family: 'Barlow', sans-serif;
-    letter-spacing: 0.3px;
+    flex: 1; text-align: center; padding: 9px;
+    cursor: pointer; font-size: 13px; font-weight: 600;
+    color: var(--muted); border-radius: 6px; transition: all 0.15s;
+    background: none; border: none; font-family: 'Barlow', sans-serif;
 }
 
 .tab.active { background: var(--bg4); color: var(--text); border: 1px solid var(--border2); }
@@ -77,26 +65,18 @@
 .form-group { margin-bottom: 14px; }
 
 .form-label {
-    display: block;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--muted);
-    margin-bottom: 7px;
+    display: block; font-size: 10px; text-transform: uppercase;
+    letter-spacing: 1.5px; color: var(--muted); margin-bottom: 7px;
     font-family: 'DM Mono', monospace;
 }
 
 .form-input {
-    width: 100%;
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    color: var(--text);
-    border-radius: 7px;
-    padding: 10px 14px;
-    font-size: 13px;
-    font-family: 'Barlow', sans-serif;
-    transition: border-color 0.15s, box-shadow 0.15s;
-    outline: none;
+    width: 100%; background: var(--bg2); border: 1px solid var(--border);
+    color: var(--text); border-radius: 7px; padding: 11px 14px;
+    font-size: 14px; font-family: 'Barlow', sans-serif;
+    transition: border-color 0.15s, box-shadow 0.15s; outline: none;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .form-input:focus {
@@ -106,17 +86,12 @@
 
 .form-input::placeholder { color: var(--muted); }
 
-.btn-full { width: 100%; margin-top: 6px; padding: 11px; font-size: 14px; }
+.btn-full { width: 100%; margin-top: 6px; padding: 13px; font-size: 15px; }
 
 .back-link {
-    display: block;
-    text-align: center;
-    margin-top: 16px;
-    color: var(--muted);
-    font-size: 12px;
-    text-decoration: none;
-    font-family: 'DM Mono', monospace;
-    transition: color 0.15s;
+    display: block; text-align: center; margin-top: 16px;
+    color: var(--muted); font-size: 12px; text-decoration: none;
+    font-family: 'DM Mono', monospace; transition: color 0.15s;
 }
 
 .back-link:hover { color: var(--text2); }
@@ -139,37 +114,35 @@
                 <button class="tab" onclick="switchTab('signup')">Create Account</button>
             </div>
 
-            <!-- LOGIN -->
             <div class="form-panel active" id="panel-login">
                 <form method="POST">
                     <input type="hidden" name="action" value="login">
                     <div class="form-group">
                         <label class="form-label">Email Address</label>
-                        <input type="email" name="email" class="form-input" placeholder="you@example.com" required>
+                        <input type="email" name="email" class="form-input" placeholder="you@example.com" required autocomplete="email">
                     </div>
                     <div class="form-group">
                         <label class="form-label">Password</label>
-                        <input type="password" name="password" class="form-input" placeholder="••••••••" required>
+                        <input type="password" name="password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
                     </div>
                     <button type="submit" class="btn btn-primary btn-full">Sign In →</button>
                 </form>
             </div>
 
-            <!-- SIGNUP -->
             <div class="form-panel" id="panel-signup">
                 <form method="POST">
                     <input type="hidden" name="action" value="signup">
                     <div class="form-group">
                         <label class="form-label">Full Name</label>
-                        <input type="text" name="full_name" class="form-input" placeholder="Your name" required>
+                        <input type="text" name="full_name" class="form-input" placeholder="Your name" required autocomplete="name">
                     </div>
                     <div class="form-group">
                         <label class="form-label">Email Address</label>
-                        <input type="email" name="email" class="form-input" placeholder="you@example.com" required>
+                        <input type="email" name="email" class="form-input" placeholder="you@example.com" required autocomplete="email">
                     </div>
                     <div class="form-group">
                         <label class="form-label">Password</label>
-                        <input type="password" name="password" class="form-input" placeholder="Min 6 characters" required minlength="6">
+                        <input type="password" name="password" class="form-input" placeholder="Min 6 characters" required minlength="6" autocomplete="new-password">
                     </div>
                     <button type="submit" class="btn btn-primary btn-full">Create Account →</button>
                 </form>

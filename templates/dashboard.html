@@ -5,24 +5,20 @@
     background: var(--bg3);
     border: 1px solid var(--border);
     border-radius: 10px;
-    padding: 20px;
+    padding: 16px;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
     transition: border-color 0.2s;
 }
 
 .stat-card:hover { border-color: var(--border2); }
 
 .stat-icon-wrap {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    flex-shrink: 0;
+    width: 40px; height: 40px;
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
 }
 
 .stat-icon-blue   { background: rgba(74,158,255,0.1);  border: 1px solid rgba(74,158,255,0.2); }
@@ -30,95 +26,59 @@
 .stat-icon-yellow { background: rgba(245,158,11,0.1);  border: 1px solid rgba(245,158,11,0.2); }
 .stat-icon-green  { background: rgba(16,185,129,0.1);  border: 1px solid rgba(16,185,129,0.2); }
 
-.stat-info { flex: 1; }
-.stat-value { font-family: 'Rajdhani', sans-serif; font-size: 28px; font-weight: 700; color: var(--text); line-height: 1; }
-.stat-label { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; margin-top: 3px; letter-spacing: 0.5px; }
+.stat-info { flex: 1; min-width: 0; }
+.stat-value { font-family: 'Rajdhani', sans-serif; font-size: 26px; font-weight: 700; color: var(--text); line-height: 1; }
+.stat-label { font-size: 10px; color: var(--muted); font-family: 'DM Mono', monospace; margin-top: 2px; letter-spacing: 0.5px; }
 
-.chart-card {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 20px;
-}
+.chart-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
 
 .chart-title {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    margin-bottom: 20px;
-    color: var(--text);
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    font-family: 'Rajdhani', sans-serif; font-size: 15px; font-weight: 600;
+    letter-spacing: 0.5px; margin-bottom: 16px; color: var(--text);
+    display: flex; align-items: center; gap: 8px;
 }
 
-.chart-title::before {
-    content: '';
-    width: 3px;
-    height: 16px;
-    background: var(--accent);
-    border-radius: 2px;
-}
+.chart-title::before { content: ''; width: 3px; height: 16px; background: var(--accent); border-radius: 2px; }
 
-.bar-chart { display: flex; align-items: flex-end; gap: 10px; height: 140px; padding-bottom: 4px; }
+.bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 120px; padding-bottom: 4px; }
 
 .bar-wrap { display: flex; flex-direction: column; align-items: center; flex: 1; height: 100%; justify-content: flex-end; }
 
 .bar {
-    width: 100%;
-    background: linear-gradient(to top, var(--accent2), var(--accent));
-    border-radius: 4px 4px 0 0;
-    min-height: 4px;
-    height: var(--h, 0%);
-    position: relative;
-    transition: opacity 0.2s;
+    width: 100%; background: linear-gradient(to top, var(--accent2), var(--accent));
+    border-radius: 4px 4px 0 0; min-height: 4px; height: var(--h, 0%);
+    position: relative; transition: opacity 0.2s;
 }
 
 .bar:hover { opacity: 0.8; }
 
-.bar-label {
-    font-size: 9px;
-    color: var(--muted);
-    margin-top: 6px;
-    font-family: 'DM Mono', monospace;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
+.bar-label { font-size: 8px; color: var(--muted); margin-top: 6px; font-family: 'DM Mono', monospace; text-align: center; text-transform: uppercase; }
 
-.donut-wrap { display: flex; align-items: center; justify-content: center; gap: 28px; height: 140px; }
+.donut-wrap { display: flex; align-items: center; justify-content: center; gap: 24px; height: 120px; }
 
-.donut-legend { display: flex; flex-direction: column; gap: 10px; }
-
-.legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; font-family: 'DM Mono', monospace; color: var(--text2); }
-
+.donut-legend { display: flex; flex-direction: column; gap: 8px; }
+.legend-item { display: flex; align-items: center; gap: 8px; font-size: 11px; font-family: 'DM Mono', monospace; color: var(--text2); }
 .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
 
-.empty-state {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 60px;
-    text-align: center;
-}
-
-.empty-icon { font-size: 2.5rem; margin-bottom: 14px; opacity: 0.5; }
-.empty-title { font-family: 'Rajdhani', sans-serif; font-size: 20px; font-weight: 600; margin-bottom: 6px; }
+.empty-state { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 48px 24px; text-align: center; }
+.empty-icon { font-size: 2rem; margin-bottom: 12px; opacity: 0.5; }
+.empty-title { font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 6px; }
 .empty-sub { color: var(--muted); font-size: 12px; font-family: 'DM Mono', monospace; margin-bottom: 20px; }
 
 .report-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 11px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 13px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px;
+    gap: 8px; flex-wrap: wrap;
 }
 
 .report-row:last-child { border-bottom: none; }
-.report-name { color: var(--text); font-family: 'DM Mono', monospace; font-size: 12px; }
-.report-meta { color: var(--muted); font-family: 'DM Mono', monospace; font-size: 11px; }
+.report-name { color: var(--text); font-family: 'DM Mono', monospace; font-size: 11px; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.report-meta { color: var(--muted); font-family: 'DM Mono', monospace; font-size: 11px; white-space: nowrap; }
+
+@media (max-width: 768px) {
+    .charts-grid { grid-template-columns: 1fr !important; }
+    .donut-wrap { height: auto; padding: 12px 0; }
+}
 </style>
 
 <nav class="navbar">
@@ -132,7 +92,17 @@
         <a href="/reports">Reports</a>
         <a href="/logout" class="logout">Sign Out</a>
     </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+    </button>
 </nav>
+
+<div class="mobile-menu" id="mobile-menu">
+    <a href="/dashboard" class="active">Dashboard</a>
+    <a href="/analyze">Analyze</a>
+    <a href="/reports">Reports</a>
+    <a href="/logout" class="logout">Sign Out</a>
+</div>
 
 <div class="page">
     <div class="page-header">
@@ -140,41 +110,27 @@
         <div class="page-sub">// inspection overview · {{ stats.total_inspections }} total sessions</div>
     </div>
 
-    <!-- Stat Cards -->
-    <div class="grid-4" style="margin-bottom:24px;">
+    <div class="grid-4" style="margin-bottom:20px;">
         <div class="stat-card">
             <div class="stat-icon-wrap stat-icon-blue">🔍</div>
-            <div class="stat-info">
-                <div class="stat-value">{{ stats.total_inspections }}</div>
-                <div class="stat-label">Inspections</div>
-            </div>
+            <div class="stat-info"><div class="stat-value">{{ stats.total_inspections }}</div><div class="stat-label">Inspections</div></div>
         </div>
         <div class="stat-card">
             <div class="stat-icon-wrap stat-icon-yellow">⚠</div>
-            <div class="stat-info">
-                <div class="stat-value">{{ stats.total_defects }}</div>
-                <div class="stat-label">Total Defects</div>
-            </div>
+            <div class="stat-info"><div class="stat-value">{{ stats.total_defects }}</div><div class="stat-label">Total Defects</div></div>
         </div>
         <div class="stat-card">
             <div class="stat-icon-wrap stat-icon-red">▲</div>
-            <div class="stat-info">
-                <div class="stat-value">{{ stats.severity_counts.HIGH }}</div>
-                <div class="stat-label">High Severity</div>
-            </div>
+            <div class="stat-info"><div class="stat-value">{{ stats.severity_counts.HIGH }}</div><div class="stat-label">High Severity</div></div>
         </div>
         <div class="stat-card">
             <div class="stat-icon-wrap stat-icon-green">▼</div>
-            <div class="stat-info">
-                <div class="stat-value">{{ stats.severity_counts.LOW }}</div>
-                <div class="stat-label">Low Severity</div>
-            </div>
+            <div class="stat-info"><div class="stat-value">{{ stats.severity_counts.LOW }}</div><div class="stat-label">Low Severity</div></div>
         </div>
     </div>
 
     {% if stats.defect_counts %}
-    <div class="grid-2" style="margin-bottom:24px;">
-        <!-- Bar Chart -->
+    <div class="grid-2 charts-grid" style="margin-bottom:20px;">
         <div class="chart-card">
             <div class="chart-title">Defects by Type</div>
             {% set max_val = stats.defect_counts.values()|max %}
@@ -182,13 +138,12 @@
                 {% for name, count in stats.defect_counts.items() %}
                 <div class="bar-wrap">
                     <div class="bar" style="--h: {{ (count / max_val * 100)|int }}%;"></div>
-                    <div class="bar-label">{{ name[:6] }}</div>
+                    <div class="bar-label">{{ name[:5] }}</div>
                 </div>
                 {% endfor %}
             </div>
         </div>
 
-        <!-- Donut Chart -->
         <div class="chart-card">
             <div class="chart-title">Severity Distribution</div>
             <div class="donut-wrap">
@@ -197,27 +152,18 @@
                 {% set hp = (stats.severity_counts.HIGH / total * 314)|int %}
                 {% set mp = (stats.severity_counts.MEDIUM / total * 314)|int %}
                 {% set lp = (stats.severity_counts.LOW / total * 314)|int %}
-                <svg width="120" height="120" viewBox="0 0 120 120">
+                <svg width="110" height="110" viewBox="0 0 120 120">
                     <circle cx="60" cy="60" r="45" fill="none" stroke="#1a2438" stroke-width="20"/>
-                    {% if hp > 0 %}
-                    <circle cx="60" cy="60" r="45" fill="none" stroke="#ef4444" stroke-width="20"
-                        stroke-dasharray="{{ hp }} 314" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
-                    {% endif %}
-                    {% if mp > 0 %}
-                    <circle cx="60" cy="60" r="45" fill="none" stroke="#f59e0b" stroke-width="20"
-                        stroke-dasharray="{{ mp }} 314" stroke-dashoffset="-{{ hp }}" transform="rotate(-90 60 60)"/>
-                    {% endif %}
-                    {% if lp > 0 %}
-                    <circle cx="60" cy="60" r="45" fill="none" stroke="#10b981" stroke-width="20"
-                        stroke-dasharray="{{ lp }} 314" stroke-dashoffset="-{{ hp + mp }}" transform="rotate(-90 60 60)"/>
-                    {% endif %}
+                    {% if hp > 0 %}<circle cx="60" cy="60" r="45" fill="none" stroke="#ef4444" stroke-width="20" stroke-dasharray="{{ hp }} 314" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>{% endif %}
+                    {% if mp > 0 %}<circle cx="60" cy="60" r="45" fill="none" stroke="#f59e0b" stroke-width="20" stroke-dasharray="{{ mp }} 314" stroke-dashoffset="-{{ hp }}" transform="rotate(-90 60 60)"/>{% endif %}
+                    {% if lp > 0 %}<circle cx="60" cy="60" r="45" fill="none" stroke="#10b981" stroke-width="20" stroke-dasharray="{{ lp }} 314" stroke-dashoffset="-{{ hp + mp }}" transform="rotate(-90 60 60)"/>{% endif %}
                     <text x="60" y="64" text-anchor="middle" fill="#c8d6e8" font-size="16" font-weight="700" font-family="Rajdhani, sans-serif">{{ total }}</text>
                 </svg>
                 {% endif %}
                 <div class="donut-legend">
-                    <div class="legend-item"><div class="legend-dot" style="background:#ef4444;"></div>HIGH &mdash; {{ stats.severity_counts.HIGH }}</div>
-                    <div class="legend-item"><div class="legend-dot" style="background:#f59e0b;"></div>MED &mdash; {{ stats.severity_counts.MEDIUM }}</div>
-                    <div class="legend-item"><div class="legend-dot" style="background:#10b981;"></div>LOW &mdash; {{ stats.severity_counts.LOW }}</div>
+                    <div class="legend-item"><div class="legend-dot" style="background:#ef4444;"></div>HIGH — {{ stats.severity_counts.HIGH }}</div>
+                    <div class="legend-item"><div class="legend-dot" style="background:#f59e0b;"></div>MED — {{ stats.severity_counts.MEDIUM }}</div>
+                    <div class="legend-item"><div class="legend-dot" style="background:#10b981;"></div>LOW — {{ stats.severity_counts.LOW }}</div>
                 </div>
             </div>
         </div>
@@ -229,9 +175,9 @@
         {% for report in stats.recent_reports %}
         <div class="report-row">
             <span class="report-name">{{ report.image_name or 'Unknown' }}</span>
-            <span class="report-meta">{{ report.total_defects }} defect(s)</span>
+            <span class="report-meta">{{ report.total_defects }} defects</span>
             <span class="report-meta">{{ report.created_at[:10] }}</span>
-            <a href="/reports" style="font-size:11px;color:var(--accent);text-decoration:none;font-family:'DM Mono',monospace;">View →</a>
+            <a href="/reports" style="font-size:11px;color:var(--accent);text-decoration:none;font-family:'DM Mono',monospace;white-space:nowrap;">View →</a>
         </div>
         {% endfor %}
     </div>

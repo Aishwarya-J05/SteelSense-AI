@@ -7,7 +7,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 80px 32px;
+    padding: 60px 20px;
     text-align: center;
     position: relative;
     z-index: 1;
@@ -23,22 +23,22 @@
     color: var(--steel);
     padding: 6px 16px;
     border-radius: 4px;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
-    margin-bottom: 28px;
+    margin-bottom: 24px;
     font-family: 'DM Mono', monospace;
     animation: fadeUp 0.5s ease both;
 }
 
 .hero-title {
     font-family: 'Rajdhani', sans-serif;
-    font-size: clamp(3rem, 6vw, 5rem);
+    font-size: clamp(2.4rem, 8vw, 5rem);
     font-weight: 700;
     line-height: 1.05;
     letter-spacing: 2px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     text-transform: uppercase;
     animation: fadeUp 0.5s 0.1s ease both;
 }
@@ -47,52 +47,57 @@
 
 .hero-title-sub {
     display: block;
-    font-size: clamp(1rem, 2vw, 1.4rem);
+    font-size: clamp(0.7rem, 2.5vw, 1.2rem);
     font-weight: 400;
     color: var(--text2);
-    letter-spacing: 4px;
+    letter-spacing: 3px;
     text-transform: uppercase;
     font-family: 'DM Mono', monospace;
     margin-top: 8px;
 }
 
 .hero-desc {
-    font-size: 15px;
+    font-size: 14px;
     color: var(--text2);
     max-width: 480px;
     line-height: 1.7;
-    margin-bottom: 40px;
+    margin-bottom: 36px;
     animation: fadeUp 0.5s 0.2s ease both;
 }
 
 .stats-strip {
     display: flex;
+    flex-wrap: wrap;
     border: 1px solid var(--border);
     border-radius: 10px;
     overflow: hidden;
-    margin-bottom: 48px;
+    margin-bottom: 40px;
     animation: fadeUp 0.5s 0.3s ease both;
     background: var(--bg3);
+    width: 100%;
+    max-width: 600px;
 }
 
 .stat-box {
-    padding: 20px 36px;
+    padding: 16px 24px;
     border-right: 1px solid var(--border);
     text-align: center;
+    flex: 1;
+    min-width: 120px;
 }
 
 .stat-box:last-child { border-right: none; }
 
 .stat-val {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: var(--accent);
     line-height: 1;
 }
 
 .stat-label {
-    font-size: 10px;
+    font-size: 9px;
     color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 1.5px;
@@ -103,10 +108,10 @@
 .features {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+    gap: 12px;
     max-width: 820px;
     width: 100%;
-    margin-bottom: 48px;
+    margin-bottom: 40px;
     animation: fadeUp 0.5s 0.4s ease both;
 }
 
@@ -114,7 +119,7 @@
     background: var(--bg3);
     border: 1px solid var(--border);
     border-radius: 10px;
-    padding: 22px 20px;
+    padding: 18px 16px;
     text-align: left;
     transition: border-color 0.2s, transform 0.2s;
 }
@@ -122,32 +127,29 @@
 .feature-card:hover { border-color: var(--border2); transform: translateY(-3px); }
 
 .feature-icon {
-    width: 36px;
-    height: 36px;
+    width: 32px; height: 32px;
     background: rgba(74,158,255,0.1);
     border: 1px solid rgba(74,158,255,0.2);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    margin-bottom: 14px;
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    margin-bottom: 12px;
 }
 
-.feature-title { font-family: 'Rajdhani', sans-serif; font-size: 16px; font-weight: 600; margin-bottom: 6px; letter-spacing: 0.5px; }
-.feature-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+.feature-title { font-family: 'Rajdhani', sans-serif; font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+.feature-desc { font-size: 11px; color: var(--muted); line-height: 1.6; }
 
 .tech-pills {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: 40px;
+    margin-bottom: 36px;
     animation: fadeUp 0.5s 0.5s ease both;
 }
 
 .tech-pill {
-    padding: 5px 14px;
+    padding: 5px 12px;
     border-radius: 4px;
     font-size: 11px;
     font-weight: 600;
@@ -158,13 +160,22 @@
     letter-spacing: 0.5px;
 }
 
-.cta-group { display: flex; gap: 12px; animation: fadeUp 0.5s 0.6s ease both; }
-
-.btn-lg { padding: 12px 32px; font-size: 14px; }
+.cta-group { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; animation: fadeUp 0.5s 0.6s ease both; }
+.btn-lg { padding: 12px 28px; font-size: 14px; }
 
 @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .features { grid-template-columns: 1fr; }
+    .stats-strip { max-width: 100%; }
+    .stat-box { min-width: 50%; border-bottom: 1px solid var(--border); }
+    .stat-box:nth-child(2n) { border-right: none; }
+    .stat-box:nth-last-child(-n+2) { border-bottom: none; }
+    .cta-group { flex-direction: column; width: 100%; max-width: 300px; }
+    .btn-lg { width: 100%; justify-content: center; }
 }
 </style>
 
@@ -185,7 +196,7 @@
         <div class="stat-box"><div class="stat-val">6</div><div class="stat-label">Defect Classes</div></div>
         <div class="stat-box"><div class="stat-val">73.6%</div><div class="stat-label">mAP50 Score</div></div>
         <div class="stat-box"><div class="stat-val">&lt;2s</div><div class="stat-label">Analysis Time</div></div>
-        <div class="stat-box"><div class="stat-val">~40,000</div><div class="stat-label">Training Images</div></div>
+        <div class="stat-box"><div class="stat-val">1800+</div><div class="stat-label">Training Images</div></div>
     </div>
 
     <div class="features">
